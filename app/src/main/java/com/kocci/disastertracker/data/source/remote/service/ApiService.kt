@@ -1,6 +1,6 @@
-package com.kocci.disastertracker.data.source
+package com.kocci.disastertracker.data.source.remote.service
 
-import com.kocci.disastertracker.domain.model.ReportsApiResponse
+import com.kocci.disastertracker.data.source.remote.response.ReportsApiResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

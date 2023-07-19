@@ -1,6 +1,6 @@
 package com.kocci.disastertracker.di
 
-import com.kocci.disastertracker.data.source.ApiService
+import com.kocci.disastertracker.data.source.remote.service.ApiService
 import com.kocci.disastertracker.util.Constant
 import dagger.Module
 import dagger.Provides

@@ -1,4 +1,4 @@
-package com.kocci.disastertracker.domain.model
+package com.kocci.disastertracker.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 

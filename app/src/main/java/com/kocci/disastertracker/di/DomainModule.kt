@@ -1,7 +1,7 @@
 package com.kocci.disastertracker.di
 
-import com.kocci.disastertracker.domain.interactor.RealtimeDisasterInteractor
-import com.kocci.disastertracker.domain.usecase.RealtimeDisasterUseCase
+import com.kocci.disastertracker.domain.interactor.ReportDisasterInteractor
+import com.kocci.disastertracker.domain.usecase.ReportDisasterUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,5 +12,5 @@ import dagger.hilt.components.SingletonComponent
 abstract class DomainModule {
 
     @Binds
-    abstract fun provideUseCase(interactor: RealtimeDisasterInteractor) : RealtimeDisasterUseCase
+    abstract fun provideUseCase(interactor: ReportDisasterInteractor) : ReportDisasterUseCase
 }

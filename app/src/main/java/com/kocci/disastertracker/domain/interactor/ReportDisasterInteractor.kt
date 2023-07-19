@@ -1,11 +1,11 @@
 package com.kocci.disastertracker.domain.interactor
 
 import com.kocci.disastertracker.data.repository.AppRepository
-import com.kocci.disastertracker.domain.usecase.RealtimeDisasterUseCase
+import com.kocci.disastertracker.domain.usecase.ReportDisasterUseCase
 import javax.inject.Inject
 
-class RealtimeDisasterInteractor @Inject constructor(
+class ReportDisasterInteractor @Inject constructor(
     private val repository: AppRepository
-) : RealtimeDisasterUseCase {
+) : ReportDisasterUseCase {
 
 }
