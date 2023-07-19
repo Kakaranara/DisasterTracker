@@ -1,6 +1,7 @@
 package com.kocci.disastertracker.di
 
 import com.kocci.disastertracker.data.source.ApiService
+import com.kocci.disastertracker.util.Constant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,11 +16,10 @@ class RemoteModule {
 
     @Provides
     fun provideRetrofit(): Retrofit {
-        val BASE_URL = "xxx"
         val gsonConverter = GsonConverterFactory.create()
         return Retrofit
             .Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Constant.BASE_URL)
             .addConverterFactory(gsonConverter)
             .build()
     }
