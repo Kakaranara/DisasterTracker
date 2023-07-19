@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -62,6 +63,11 @@ dependencies {
 
     //lifecycle -> convert flow to live data
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+
+    //navigation component setup
+    implementation "androidx.navigation:navigation-fragment-ktx:2.6.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.6.0"
+
 }
 
 kapt {
