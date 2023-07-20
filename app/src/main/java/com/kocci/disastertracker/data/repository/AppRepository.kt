@@ -19,7 +19,7 @@ class AppRepository @Inject constructor(
             val apiResponse = apiService.getCrowdSourcingReport()
             if (apiResponse.isSuccessful) {
                 val body = apiResponse.body() ?: throw Exception("Data is NULL!")
-                val reportList = convertReportApiResponseToDomain(body)
+                val reportList = convertReportApiResponseToDomain(body).filter { it.imgUrl != null }
                 emit(Async.Success(reportList))
             } else {
                 emit(Async.Error(apiResponse.message()))

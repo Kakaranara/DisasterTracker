@@ -3,6 +3,7 @@ package com.kocci.disastertracker.util.mapper
 import com.kocci.disastertracker.data.source.remote.response.ReportsApiResponse
 import com.kocci.disastertracker.domain.model.LatLng
 import com.kocci.disastertracker.domain.model.Reports
+import com.kocci.disastertracker.util.helper.DateHelper
 
 fun convertReportApiResponseToDomain(reportsApiResponse: ReportsApiResponse): List<Reports> {
     val reportList = mutableListOf<Reports>()
@@ -13,10 +14,15 @@ fun convertReportApiResponseToDomain(reportsApiResponse: ReportsApiResponse): Li
                 lng = it?.coordinates?.get(0) ?: 0.0
             )
             val title = it?.properties?.title ?: "No title"
-            val body = it?.properties?.text ?: "No Description"
+            var body = it?.properties?.text ?: "No Description"
             val imgUrl = it?.properties?.imageUrl
+            val date = it?.properties?.createdAt ?: ""
+            val beautifyDate = DateHelper.beautifyDate(date)
 
-            val reports = Reports(coordinates, title, body, imgUrl)
+            if (body.isEmpty()) {
+                body = "No Description"
+            }
+            val reports = Reports(coordinates, title, body, beautifyDate, imgUrl)
             reportList.add(reports)
         }
     }
