@@ -1,6 +1,6 @@
 package com.kocci.disastertracker.domain.model
 
-data class LatLng(
+data class Coordinates(
     val lat : Double,
     val lng : Double
 )
