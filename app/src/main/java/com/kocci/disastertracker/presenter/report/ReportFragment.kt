@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kocci.disastertracker.databinding.FragmentReportBinding
 import com.kocci.disastertracker.domain.reactive.Async
+import com.kocci.disastertracker.util.extension.gone
 import com.kocci.disastertracker.util.extension.showToast
+import com.kocci.disastertracker.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,16 +36,18 @@ class ReportFragment : Fragment(), View.OnClickListener {
         viewModel.data.observe(viewLifecycleOwner) {
             when (it) {
                 is Async.Error -> {
+                    binding.loadingReport.gone()
                     showToast("Error : ${it.message}")
                 }
 
                 Async.Loading -> {
-                    showToast("Loading..")
+                    binding.loadingReport.visible()
                 }
 
                 is Async.Success -> {
                     Log.d("TEST", "onViewCreated: ${it.data}")
 
+                    binding.loadingReport.gone()
                     val mAdapter = ReportListAdapter(it.data)
                     val layout = LinearLayoutManager(requireActivity())
                     binding.rvReportList.apply {
