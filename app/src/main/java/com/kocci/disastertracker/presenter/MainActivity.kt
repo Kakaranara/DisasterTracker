@@ -1,11 +1,12 @@
 package com.kocci.disastertracker.presenter
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.kocci.disastertracker.R
 import com.kocci.disastertracker.databinding.ActivityMainBinding
-import com.kocci.disastertracker.domain.reactive.Async
-import com.kocci.disastertracker.util.extension.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,26 +16,13 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: MainViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        viewModel.reportList.observe(this) {
-            when (it) {
-                is Async.Error -> {
-                    showToast(it.message)
-                }
-
-                Async.Loading -> {
-                    showToast("Loading")
-                }
-
-                is Async.Success -> {
-                    showToast(it.data.toString())
-                }
-            }
-        }
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val controller = navHostFragment.navController
+        binding.botNavView.setupWithNavController(controller)
     }
 }

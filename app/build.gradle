@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -62,6 +64,19 @@ dependencies {
 
     //lifecycle -> convert flow to live data
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+
+    //navigation component setup
+    implementation "androidx.navigation:navigation-fragment-ktx:2.6.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.6.0"
+
+    //ui related
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    //google services - GMaps purpose
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+
+
 }
 
 kapt {
