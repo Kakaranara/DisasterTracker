@@ -6,4 +6,8 @@
     <string name="crowd_sourcing_report">Crowd Sourcing Report</string>
     <string name="date_show">Created at %s</string>
     <string name="latest_news_information">Latest News Information</string>
+    <string name="coming_soon">Coming Soon</string>
+    <string name="menu">Menu</string>
+    <string name="flood">Flood</string>
+    <string name="reports">Reports</string>
 </resources>

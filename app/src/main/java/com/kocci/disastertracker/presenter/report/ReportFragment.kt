@@ -40,11 +40,6 @@ class ReportFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setup map
-
-//        val mapFragment =
-//            childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
-//        mapFragment?.getMapAsync(this)
 
         viewModel.data.observe(viewLifecycleOwner) {
             when (it) {
