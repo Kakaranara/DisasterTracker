@@ -1,9 +1,9 @@
 package com.kocci.disastertracker.data.repository
 
-import android.content.res.Resources.NotFoundException
 import com.kocci.disastertracker.data.source.remote.service.ApiService
 import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
+import com.kocci.disastertracker.domain.repository.ReportRepository
 import com.kocci.disastertracker.util.exception.EmptyListException
 import com.kocci.disastertracker.util.exception.NonsenseException
 import com.kocci.disastertracker.util.exception.ProvinceNotFoundException
@@ -15,13 +15,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
-class AppRepository @Inject constructor(
+class ReportRepositoryImpl @Inject constructor(
     private val apiService: ApiService
-) {
-    fun getReportList(provinceName: String?): Flow<Async<List<Reports>>> = flow {
+) : ReportRepository {
+    override fun getReportList(provinceName: String?): Flow<Async<List<Reports>>> = flow {
         try {
             emit(Async.Loading)
             delay(500L) //just to show if loading exist.. remove later
