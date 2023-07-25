@@ -20,17 +20,24 @@ import javax.inject.Inject
 class ReportRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : ReportRepository {
-    override fun getReportList(provinceName: String?): Flow<Async<List<Reports>>> = flow {
+    override fun getReportList(
+        provinceName: String?,
+        disasterType: String?
+    ): Flow<Async<List<Reports>>> = flow {
         try {
             emit(Async.Loading)
             delay(500L) //just to show if loading exist.. remove later
             var code: String? = null
+            val disaster = disasterType ?: "flood"
 
             if (provinceName != null) {
                 code = ProvinceHelper.getProvinceCode(provinceName)
             }
 
-            val apiResponse = apiService.getCrowdSourcingReport(provinceCode = code)
+            val apiResponse = apiService.getCrowdSourcingReport(
+                provinceCode = code,
+                disasterType = disaster
+            )
             MyLogger.e(apiResponse.toString())
             if (apiResponse.isSuccessful) {
                 val body =

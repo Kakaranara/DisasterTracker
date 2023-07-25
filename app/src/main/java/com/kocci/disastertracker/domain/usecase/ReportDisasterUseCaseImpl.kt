@@ -10,8 +10,8 @@ import javax.inject.Inject
 class ReportDisasterUseCaseImpl @Inject constructor(
     private val repository: ReportRepository
 ) : ReportDisasterUseCase {
-    override fun getReportData(provinceName: String?): Flow<Async<List<Reports>>> {
-        return repository.getReportList(provinceName)
+    override fun getReportData(provinceName: String?, disasterType: String?): Flow<Async<List<Reports>>> {
+        return repository.getReportList(provinceName, disasterType)
     }
 
     override fun getAvailableProvince(): List<String> = ProvinceHelper.getAvailableProvince()

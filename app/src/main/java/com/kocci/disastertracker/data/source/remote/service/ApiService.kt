@@ -10,6 +10,7 @@ interface ApiService {
     @GET("reports")
     suspend fun getCrowdSourcingReport(
         @Query("admin") provinceCode: String? = null,
+        @Query("disaster") disasterType: String? = null,
         @Query("timeperiod") time: Int = 604800
     ): Response<ReportsApiResponse>
 }

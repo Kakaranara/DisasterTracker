@@ -46,42 +46,48 @@
 
 
             <RadioGroup
+                android:id="@+id/rgReport"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/rbReportFlood"
                     style="@style/CustomRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:text="@string/flood" />
 
                 <RadioButton
+                    android:id="@+id/rbReportEarthquake"
                     style="@style/CustomRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/earthquake" />
 
                 <RadioButton
+                    android:id="@+id/rbReportFire"
                     style="@style/CustomRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/fire" />
 
                 <RadioButton
+                    android:id="@+id/rbReportHaze"
                     style="@style/CustomRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/haze" />
 
                 <RadioButton
+                    android:id="@+id/rbReportWind"
                     style="@style/CustomRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/wind" />
 
                 <RadioButton
+                    android:id="@+id/rbReportVolcano"
                     style="@style/CustomRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

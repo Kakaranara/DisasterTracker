@@ -3,14 +3,11 @@ package com.kocci.disastertracker.presenter.report
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
 import com.kocci.disastertracker.domain.usecase.ReportDisasterUseCase
-import com.kocci.disastertracker.util.helper.MyLogger
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,19 +26,17 @@ class ReportViewModel @Inject constructor(
     private var _reports: MutableLiveData<Async<List<Reports>>> = MutableLiveData()
     val reports: LiveData<Async<List<Reports>>> get() = _reports
 
-    private var _test: MutableLiveData<Async<List<Reports>>> = MutableLiveData()
-
 
     init {
         callApi(
-            provinceName = null
+            provinceName = null,
+            disasterType = null
         )
     }
 
-    fun callApi(provinceName: String?) {
-//        _reports = useCase.getReportData(provinceName).asLiveData()
+    fun callApi(provinceName: String?, disasterType: String? = null) {
         viewModelScope.launch {
-            useCase.getReportData(provinceName).collect {
+            useCase.getReportData(provinceName, disasterType).collect {
                 _reports.value = it
             }
         }

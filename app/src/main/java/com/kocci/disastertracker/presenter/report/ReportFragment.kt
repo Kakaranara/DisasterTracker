@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,9 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
     private val binding get() = _binding!!
     private val viewModel: ReportViewModel by viewModels()
 
+    private var provinceName: String? = null
+    private var disasterType: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -42,17 +46,20 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         setupSearchAdapter()
         setupGoogleMaps()
+        setupFilter()
 
         binding.acTvSearchReport.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
                 val text = binding.acTvSearchReport.text.toString()
                 val keyboard = requireActivity().getSystemService(InputMethodManager::class.java)
                 keyboard.hideSoftInputFromWindow(v.windowToken, 0)
-                viewModel.callApi(text)
+                provinceName = text
+                viewModel.callApi(provinceName, disasterType)
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
         }
+
         viewModel.reports.observe(viewLifecycleOwner) {
             when (it) {
                 is Async.Error -> {
@@ -79,6 +86,18 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    private fun setupFilter() {
+        binding.rgReport.apply {
+            check(binding.rbReportFlood.id) //flood is the the first check
+            setOnCheckedChangeListener { group, checkedId ->
+                val radioButton = findViewById<RadioButton>(checkedId)
+                val selectedText = radioButton.text.toString()
+                disasterType = selectedText.lowercase()
+                viewModel.callApi(provinceName, disasterType)
+            }
+        }
+    }
+
 
     override fun onMapReady(maps: GoogleMap) {
         viewModel.reports.observe(viewLifecycleOwner) {
@@ -101,9 +120,7 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
 
                     reports.forEach { data ->
                         val position = LatLng(data.coordinates.lat, data.coordinates.lng)
-                        val markerOpt = MarkerOptions()
-                            .position(position)
-                            .title(data.title)
+                        val markerOpt = MarkerOptions().position(position).title(data.title)
                             .snippet("Disaster : ${data.disasterType}")
 
                         maps.addMarker(markerOpt)

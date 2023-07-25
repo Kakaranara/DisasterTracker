@@ -13,4 +13,9 @@
     <string name="app_description">In this app, you can track the disaster in indonesia. It can be a report from people, water level monitoring, and others. </string>
     <string name="icon_of_menu">icon of menu</string>
     <string name="search_specific_area">Search Specific Area</string>
+    <string name="earthquake">Earthquake</string>
+    <string name="fire">Fire</string>
+    <string name="haze">Haze</string>
+    <string name="wind">Wind</string>
+    <string name="volcano">Volcano</string>
 </resources>
