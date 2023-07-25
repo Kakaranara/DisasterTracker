@@ -5,6 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +20,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.kocci.disastertracker.R
 import com.kocci.disastertracker.databinding.FragmentReportBinding
-import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
 import com.kocci.disastertracker.util.extension.gone
 import com.kocci.disastertracker.util.extension.showToast
@@ -24,12 +27,13 @@ import com.kocci.disastertracker.util.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReportFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
+class ReportFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentReportBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ReportViewModel by viewModels()
 
-    var reportList: List<Reports>? = null
+    private var provinceName: String? = null
+    private var disasterType: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -40,12 +44,27 @@ class ReportFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupSearchAdapter()
+        setupGoogleMaps()
+        setupFilter()
 
-        viewModel.data.observe(viewLifecycleOwner) {
+        binding.acTvSearchReport.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
+                val text = binding.acTvSearchReport.text.toString()
+                val keyboard = requireActivity().getSystemService(InputMethodManager::class.java)
+                keyboard.hideSoftInputFromWindow(v.windowToken, 0)
+                provinceName = text
+                viewModel.callApi(provinceName, disasterType)
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
+
+        viewModel.reports.observe(viewLifecycleOwner) {
             when (it) {
                 is Async.Error -> {
                     binding.loadingReport.gone()
-                    showToast("Error : ${it.message}")
+                    showToast(it.message)
                 }
 
                 Async.Loading -> {
@@ -62,41 +81,69 @@ class ReportFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
                         adapter = mAdapter
                         layoutManager = layout
                     }
-                    updateMapWithData(it.data)
                 }
             }
         }
     }
 
-    override fun onMapReady(maps: GoogleMap) {
-        reportList?.let {
-            val coor = it[0].coordinates
-            val latLng = LatLng(coor.lat, coor.lng)
-            maps.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 8f))
-            it.forEach { data ->
-                maps.addMarker(
-                    MarkerOptions().position(LatLng(data.coordinates.lat, data.coordinates.lng))
-                        .title(data.title).snippet("Disaster : ${data.disasterType}")
-                )
+    private fun setupFilter() {
+        binding.rgReport.apply {
+            check(binding.rbReportFlood.id) //flood is the the first check
+            setOnCheckedChangeListener { group, checkedId ->
+                val radioButton = findViewById<RadioButton>(checkedId)
+                val selectedText = radioButton.text.toString()
+                disasterType = selectedText.lowercase()
+                viewModel.callApi(provinceName, disasterType)
             }
-        } ?: showToast("data is null")
-    }
-
-    private fun updateMapWithData(data: List<Reports>?) {
-        if (data != null && data.isNotEmpty()) {
-            reportList = data
-            // Since data is not null and not empty, update the map with the data
-            val mapFragment =
-                childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
-            mapFragment?.getMapAsync(this)
-        } else {
-            showToast("Data is null or empty")
         }
     }
 
-    override fun onClick(v: View?) {
-        when (v) {
 
+    override fun onMapReady(maps: GoogleMap) {
+        viewModel.reports.observe(viewLifecycleOwner) {
+            when (it) {
+                is Async.Error -> {
+                    //already handled in reports
+                }
+
+                Async.Loading -> {
+                    //already handled in reports
+                }
+
+                is Async.Success -> {
+                    maps.clear()
+
+                    val reports = it.data
+                    val coordinates = reports[0].coordinates
+                    val latLng = LatLng(coordinates.lat, coordinates.lng)
+                    maps.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 8f))
+
+                    reports.forEach { data ->
+                        val position = LatLng(data.coordinates.lat, data.coordinates.lng)
+                        val markerOpt = MarkerOptions().position(position).title(data.title)
+                            .snippet("Disaster : ${data.disasterType}")
+
+                        maps.addMarker(markerOpt)
+                    }
+                }
+            }
         }
     }
+
+    private fun setupGoogleMaps() {
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
+    }
+
+    private fun setupSearchAdapter() {
+        val searchAdapter = ArrayAdapter(
+            requireActivity(),
+            android.R.layout.simple_dropdown_item_1line,
+            viewModel.availableProvince
+        )
+        binding.acTvSearchReport.setAdapter(searchAdapter)
+    }
+
+
 }

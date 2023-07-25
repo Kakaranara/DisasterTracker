@@ -6,5 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface ReportDisasterUseCase {
-    fun getReportData(): Flow<Async<List<Reports>>>
+    fun getReportData(provinceName: String? = null, disasterType: String? = null): Flow<Async<List<Reports>>>
+    fun getAvailableProvince(): List<String>
 }

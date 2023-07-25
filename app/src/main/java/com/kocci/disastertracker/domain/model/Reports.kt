@@ -8,3 +8,8 @@ data class Reports(
     val imgUrl: String?,
     val disasterType : String
 )
+
+data class Coordinates(
+    val lat : Double,
+    val lng : Double
+)

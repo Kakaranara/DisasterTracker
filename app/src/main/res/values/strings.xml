@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DisasterTracker</string>
+    <string name="app_name">Disaster Tracker</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="introduction">In this app, you can track disasters that have occurred in Indonesia. Not only that, you can also check reports from the public regarding disasters that occur, such as floods, landslides, earthquakes, fires, and others. This application uses this data as the basis for creating the application: https://docs.petabencana.id/.  For more details, please check each of the following pages:</string>
@@ -10,4 +10,13 @@
     <string name="menu">Menu</string>
     <string name="flood">Flood</string>
     <string name="reports">Reports</string>
+    <string name="app_description">In this app, you can track the disaster in indonesia. It can be a report from people, water level monitoring, and others. </string>
+    <string name="icon_of_menu">icon of menu</string>
+    <string name="search_specific_area">Search Specific Area</string>
+    <string name="earthquake">Earthquake</string>
+    <string name="fire">Fire</string>
+    <string name="haze">Haze</string>
+    <string name="wind">Wind</string>
+    <string name="volcano">Volcano</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>
