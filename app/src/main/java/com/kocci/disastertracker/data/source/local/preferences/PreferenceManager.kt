@@ -2,6 +2,7 @@ package com.kocci.disastertracker.data.source.local.preferences
 
 import android.content.Context
 import androidx.core.content.edit
+import com.kocci.disastertracker.util.helper.MyLogger
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -17,12 +18,15 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
     }
 
     fun getDarkThemePreference(): Boolean {
-        return preference.getBoolean(Keys.isDarkTheme, false)
+        val pref = preference.getBoolean(Keys.isDarkTheme, false)
+        MyLogger.e("Pref : $pref")
+        return pref
     }
 
     fun setDarkThemePreference(state: Boolean) {
         preference.edit {
             putBoolean(Keys.isDarkTheme, state)
+            apply()
         }
     }
 }

@@ -1,15 +1,15 @@
 package com.kocci.disastertracker.presenter.menu.settings
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.kocci.disastertracker.R
 import com.kocci.disastertracker.databinding.FragmentSettingBinding
+import com.kocci.disastertracker.util.helper.MyLogger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,18 +23,25 @@ class SettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarSetting.setupWithNavController(findNavController())
 
-        var isDarkModeEnabled = viewModel.isDarkModeEnabled
+        val isDarkModeEnabled = viewModel.isDarkModeEnabled
         binding.switchDarkMode.isChecked = isDarkModeEnabled
 
-        binding.switchDarkMode.setOnClickListener {
-            if (isDarkModeEnabled) {
-                viewModel.disableDarkTheme()
-                isDarkModeEnabled = false
-            } else {
+        MyLogger.e("OnView Before: $isDarkModeEnabled")
+
+        binding.switchDarkMode.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
                 viewModel.enableDarkTheme()
-                isDarkModeEnabled = true
+            } else {
+                viewModel.disableDarkTheme()
             }
         }
+
+        MyLogger.e("OnView After: $isDarkModeEnabled")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MyLogger.e("On Create Fragment")
     }
 
     override fun onCreateView(

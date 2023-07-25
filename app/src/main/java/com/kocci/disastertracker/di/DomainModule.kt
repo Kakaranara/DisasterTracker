@@ -1,9 +1,7 @@
 package com.kocci.disastertracker.di
 
-import com.kocci.disastertracker.domain.usecase.DarkThemeUseCase
-import com.kocci.disastertracker.domain.usecase.DarkThemeUseCaseImpl
-import com.kocci.disastertracker.domain.usecase.ReportDisasterUseCaseImpl
 import com.kocci.disastertracker.domain.usecase.ReportDisasterUseCase
+import com.kocci.disastertracker.domain.usecase.ReportDisasterUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,6 +14,6 @@ abstract class DomainModule {
     @Binds
     abstract fun provideReportUseCase(impl: ReportDisasterUseCaseImpl): ReportDisasterUseCase
 
-    @Binds
-    abstract fun provideDarkThemeUseCase(impl: DarkThemeUseCaseImpl): DarkThemeUseCase
+//    @Binds
+//    abstract fun provideDarkThemeUseCase(impl: DarkThemeUseCaseImpl): DarkThemeUseCase
 }
