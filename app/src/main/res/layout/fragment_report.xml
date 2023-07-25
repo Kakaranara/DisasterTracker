@@ -35,6 +35,61 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="@id/acTvSearchReport"
+            app:layout_constraintStart_toStartOf="@id/acTvSearchReport"
+            app:layout_constraintTop_toBottomOf="@id/acTvSearchReport">
+
+
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    style="@style/CustomRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/flood" />
+
+                <RadioButton
+                    style="@style/CustomRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/earthquake" />
+
+                <RadioButton
+                    style="@style/CustomRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fire" />
+
+                <RadioButton
+                    style="@style/CustomRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/haze" />
+
+                <RadioButton
+                    style="@style/CustomRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wind" />
+
+                <RadioButton
+                    style="@style/CustomRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/volcano" />
+            </RadioGroup>
+        </HorizontalScrollView>
+
+
         <ProgressBar
             android:id="@+id/loadingReport"
             android:layout_width="wrap_content"
