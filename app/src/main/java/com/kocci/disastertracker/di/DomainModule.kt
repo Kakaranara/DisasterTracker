@@ -1,5 +1,7 @@
 package com.kocci.disastertracker.di
 
+import com.kocci.disastertracker.domain.usecase.DarkThemeUseCase
+import com.kocci.disastertracker.domain.usecase.DarkThemeUseCaseImpl
 import com.kocci.disastertracker.domain.usecase.ReportDisasterUseCaseImpl
 import com.kocci.disastertracker.domain.usecase.ReportDisasterUseCase
 import dagger.Binds
@@ -12,5 +14,8 @@ import dagger.hilt.android.components.ViewModelComponent
 abstract class DomainModule {
 
     @Binds
-    abstract fun provideUseCase(interactor: ReportDisasterUseCaseImpl): ReportDisasterUseCase
+    abstract fun provideReportUseCase(impl: ReportDisasterUseCaseImpl): ReportDisasterUseCase
+
+    @Binds
+    abstract fun provideDarkThemeUseCase(impl: DarkThemeUseCaseImpl): DarkThemeUseCase
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SimpleAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.kocci.disastertracker.R
 import com.kocci.disastertracker.databinding.FragmentMenuBinding
 
@@ -47,5 +48,14 @@ class MenuFragment : Fragment() {
 
         val adapter = SimpleAdapter(context, list, R.layout.item_menu, from, to)
         binding.listViewMenu.adapter = adapter
+
+        binding.listViewMenu.setOnItemClickListener { parent, view, position, id ->
+            when (menuName[position]) {
+                "Settings" -> {
+                    val direction = MenuFragmentDirections.actionMenuFragmentToSettingFragment()
+                    findNavController().navigate(direction)
+                }
+            }
+        }
     }
 }
