@@ -18,4 +18,5 @@
     <string name="haze">Haze</string>
     <string name="wind">Wind</string>
     <string name="volcano">Volcano</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>
