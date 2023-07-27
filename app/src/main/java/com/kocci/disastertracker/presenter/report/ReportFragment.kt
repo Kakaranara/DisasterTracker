@@ -20,8 +20,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.kocci.disastertracker.R
 import com.kocci.disastertracker.databinding.FragmentReportBinding
-import com.kocci.disastertracker.domain.model.reports.FloodReport
 import com.kocci.disastertracker.domain.model.Reports
+import com.kocci.disastertracker.domain.model.reports.FloodReport
 import com.kocci.disastertracker.domain.reactive.Async
 import com.kocci.disastertracker.util.extension.gone
 import com.kocci.disastertracker.util.extension.showToast
@@ -49,6 +49,7 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
         setupSearchAdapter()
         setupGoogleMaps()
         setupFilter()
+        setupSpinner()
 
         binding.acTvSearchReport.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
@@ -92,6 +93,10 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    private fun setupSpinner() {
+
     }
 
     private fun setupBottomSheetRvAdapter(data: List<Reports>) {

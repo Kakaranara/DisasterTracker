@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface ReportDisasterUseCase {
     fun getAllReportData(
         provinceName: String? = null,
-        disasterType: String? = null
+        disasterType: String? = null,
     ): Flow<Async<List<Reports>>>
 
     fun showFloodDangerNotification(floodDepth: Int)

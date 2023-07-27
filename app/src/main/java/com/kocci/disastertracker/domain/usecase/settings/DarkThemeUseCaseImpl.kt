@@ -1,4 +1,4 @@
-package com.kocci.disastertracker.domain.usecase
+package com.kocci.disastertracker.domain.usecase.settings
 
 import com.kocci.disastertracker.data.source.local.preferences.PreferenceManager
 import com.kocci.disastertracker.util.helper.ThemeHelper

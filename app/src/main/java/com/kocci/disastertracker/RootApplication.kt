@@ -1,7 +1,7 @@
 package com.kocci.disastertracker
 
 import android.app.Application
-import com.kocci.disastertracker.domain.usecase.DarkThemeUseCase
+import com.kocci.disastertracker.domain.usecase.settings.DarkThemeUseCase
 import com.kocci.disastertracker.util.helper.NotificationHelper
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject

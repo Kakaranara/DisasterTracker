@@ -1,5 +1,6 @@
 package com.kocci.disastertracker.data.repository
 
+import com.kocci.disastertracker.data.source.local.preferences.PreferenceManager
 import com.kocci.disastertracker.data.source.remote.service.ApiService
 import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
@@ -18,7 +19,8 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class ReportRepositoryImpl @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val prefManager: PreferenceManager
 ) : ReportRepository {
 
     override fun getReportList(
@@ -30,6 +32,7 @@ class ReportRepositoryImpl @Inject constructor(
             delay(500L) //just to show if loading exist.. remove later
             var code: String? = null
             val disaster = disasterType
+            val timePeriod = prefManager.getReportPeriod().periodInSec
 
             if (provinceName != null) {
                 code = ProvinceHelper.getProvinceCode(provinceName)
@@ -37,8 +40,10 @@ class ReportRepositoryImpl @Inject constructor(
 
             val apiResponse = apiService.getCrowdSourcingReport(
                 provinceCode = code,
-                disasterType = disaster
+                disasterType = disaster,
+                time = timePeriod
             )
+
             MyLogger.e(apiResponse.toString())
             if (apiResponse.isSuccessful) {
                 val body =

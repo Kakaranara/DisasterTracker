@@ -1,6 +1,6 @@
 package com.kocci.disastertracker.domain.usecase
 
-import  com.kocci.disastertracker.domain.model.Reports
+import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
 import com.kocci.disastertracker.domain.repository.ReportRepository
 import com.kocci.disastertracker.util.helper.NotificationHelper
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class ReportDisasterUseCaseImpl @Inject constructor(
     private val repository: ReportRepository,
-    private val notificationHelper: NotificationHelper
+    private val notificationHelper: NotificationHelper,
 ) : ReportDisasterUseCase {
     override fun getAllReportData(
         provinceName: String?,
