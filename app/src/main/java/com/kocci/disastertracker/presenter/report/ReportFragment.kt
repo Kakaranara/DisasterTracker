@@ -49,7 +49,10 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
         setupSearchAdapter()
         setupGoogleMaps()
         setupFilter()
-        setupSpinner()
+
+        binding.btnReportRefresh.setOnClickListener {
+            viewModel.callApi(provinceName, disasterType)
+        }
 
         binding.acTvSearchReport.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
@@ -88,15 +91,10 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
                     }
                     floodDepthList.maxOrNull()?.let { maxDepth ->
                         viewModel.showNotificationForFlood(maxDepth)
-//                        showToast(maxDepth.toString())
                     }
                 }
             }
         }
-    }
-
-    private fun setupSpinner() {
-
     }
 
     private fun setupBottomSheetRvAdapter(data: List<Reports>) {
