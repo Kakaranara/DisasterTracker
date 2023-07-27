@@ -1,5 +1,8 @@
 package com.kocci.disastertracker.di
 
+import com.google.gson.GsonBuilder
+import com.kocci.disastertracker.data.source.remote.response.ReportData
+import com.kocci.disastertracker.data.source.remote.response.ReportDataDeserializer
 import com.kocci.disastertracker.data.source.remote.service.ApiService
 import com.kocci.disastertracker.util.Constant
 import dagger.Module
@@ -16,7 +19,10 @@ class RemoteModule {
 
     @Provides
     fun provideRetrofit(): Retrofit {
-        val gsonConverter = GsonConverterFactory.create()
+        val gson = GsonBuilder()
+            .registerTypeAdapter(ReportData::class.java, ReportDataDeserializer())
+            .create()
+        val gsonConverter = GsonConverterFactory.create(gson)
         return Retrofit
             .Builder()
             .baseUrl(Constant.BASE_URL)

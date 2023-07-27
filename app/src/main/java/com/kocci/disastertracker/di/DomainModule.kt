@@ -14,6 +14,4 @@ abstract class DomainModule {
     @Binds
     abstract fun provideReportUseCase(impl: ReportDisasterUseCaseImpl): ReportDisasterUseCase
 
-//    @Binds
-//    abstract fun provideDarkThemeUseCase(impl: DarkThemeUseCaseImpl): DarkThemeUseCase
 }

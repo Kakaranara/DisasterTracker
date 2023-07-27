@@ -15,8 +15,7 @@ class ReportListAdapter(
         fun bind(data: Reports) {
             binding.tvReportTitle.text = data.title
             binding.tvReportBody.text = data.body
-//            binding.textView3.text = binding.root.context.getString(R.string.date_show, data.date)
-            binding.textView3.text = data.date
+            binding.tvReportDate.text = data.date
 
             Glide.with(binding.root).load(data.imgUrl).into(binding.imgReport)
         }

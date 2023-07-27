@@ -1,5 +1,6 @@
 package com.kocci.disastertracker.data.source.remote.response
 
+import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 
 data class ReportsApiResponse(
@@ -77,7 +78,8 @@ data class Tags(
 data class Properties(
 
 	@field:SerializedName("report_data")
-	val reportData: Any? = null,
+	@JsonAdapter(ReportDataDeserializer::class)
+	val reportData: ReportData? = null,
 
 	@field:SerializedName("image_url")
 	val imageUrl: String? = null,

@@ -19,4 +19,6 @@
     <string name="wind">Wind</string>
     <string name="volcano">Volcano</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="all_report">All Report</string>
+    <string name="report_period">Report Period</string>
 </resources>

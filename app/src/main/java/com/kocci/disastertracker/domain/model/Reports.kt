@@ -1,15 +1,15 @@
 package com.kocci.disastertracker.domain.model
 
-data class Reports(
-    val coordinates: Coordinates,
-    val title: String,
-    val body: String,
-    val date: String,
-    val imgUrl: String?,
-    val disasterType : String
-)
+abstract class Reports {
+    abstract val coordinates: Coordinates
+    abstract val title: String
+    abstract val body: String
+    abstract val date: String
+    abstract val imgUrl: String?
+    abstract val disasterType: String
+}
 
 data class Coordinates(
-    val lat : Double,
-    val lng : Double
+    val lat: Double,
+    val lng: Double
 )

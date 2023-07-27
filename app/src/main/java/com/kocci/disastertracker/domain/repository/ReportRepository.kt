@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ReportRepository {
     fun getReportList(provinceName: String?, disasterType: String?): Flow<Async<List<Reports>>>
+
 }

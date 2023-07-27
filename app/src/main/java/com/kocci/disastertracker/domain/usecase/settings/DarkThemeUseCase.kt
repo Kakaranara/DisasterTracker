@@ -1,4 +1,4 @@
-package com.kocci.disastertracker.domain.usecase
+package com.kocci.disastertracker.domain.usecase.settings
 
 interface DarkThemeUseCase {
     fun shouldEnableDarkTheme()

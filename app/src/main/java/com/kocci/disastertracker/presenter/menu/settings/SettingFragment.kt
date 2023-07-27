@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.kocci.disastertracker.R
 import com.kocci.disastertracker.databinding.FragmentSettingBinding
+import com.kocci.disastertracker.util.extension.showToast
 import com.kocci.disastertracker.util.helper.MyLogger
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,17 +41,17 @@ class SettingFragment : Fragment() {
         }
 
         MyLogger.e("OnView After: $isDarkModeEnabled")
-    }
+        (binding.acTvTimePeriod as? MaterialAutoCompleteTextView)?.setSimpleItems(viewModel.showAvailableTime())
+        binding.acTvTimePeriod.setText(viewModel.userTimePreference, false)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        MyLogger.e("On Create Fragment")
+        binding.acTvTimePeriod.setOnItemClickListener { _, _, _, _ ->
+            val text = binding.acTvTimePeriod.text.toString()
+            viewModel.setTimePeriod(text)
+        }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSettingBinding.inflate(inflater)
         return binding.root

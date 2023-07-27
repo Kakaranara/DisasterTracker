@@ -1,6 +1,5 @@
-package com.kocci.disastertracker.domain.usecase
+package com.kocci.disastertracker.domain.usecase.settings
 
-import android.content.res.Resources.Theme
 import com.kocci.disastertracker.data.source.local.preferences.PreferenceManager
 import com.kocci.disastertracker.util.helper.ThemeHelper
 import javax.inject.Inject

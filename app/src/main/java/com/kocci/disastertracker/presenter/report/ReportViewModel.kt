@@ -16,7 +16,6 @@ class ReportViewModel @Inject constructor(
     private val useCase: ReportDisasterUseCase
 ) : ViewModel() {
 
-    //    val data = useCase.getReportData().asLiveData()
     val availableProvince = useCase.getAvailableProvince()
 
     /**
@@ -36,10 +35,14 @@ class ReportViewModel @Inject constructor(
 
     fun callApi(provinceName: String?, disasterType: String? = null) {
         viewModelScope.launch {
-            useCase.getReportData(provinceName, disasterType).collect {
+            useCase.getAllReportData(provinceName, disasterType).collect {
                 _reports.value = it
             }
         }
+    }
+
+    fun showNotificationForFlood(depth: Int) {
+        useCase.showFloodDangerNotification(depth)
     }
 
 }
