@@ -21,7 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.kocci.disastertracker.R
 import com.kocci.disastertracker.databinding.FragmentReportBinding
 import com.kocci.disastertracker.domain.model.reports.FloodReport
-import com.kocci.disastertracker.domain.model.reports.ReportTest
+import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
 import com.kocci.disastertracker.util.extension.gone
 import com.kocci.disastertracker.util.extension.showToast
@@ -94,7 +94,7 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun setupBottomSheetRvAdapter(data: List<ReportTest>) {
+    private fun setupBottomSheetRvAdapter(data: List<Reports>) {
         val mAdapter = ReportListAdapter(data)
         val layout = LinearLayoutManager(requireActivity())
         binding.rvReportList.apply {

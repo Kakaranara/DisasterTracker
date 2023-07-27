@@ -1,6 +1,7 @@
 package com.kocci.disastertracker.domain.model.reports
 
 import com.kocci.disastertracker.domain.model.Coordinates
+import com.kocci.disastertracker.domain.model.Reports
 
 data class FireReports(
     override val body: String,
@@ -11,4 +12,4 @@ data class FireReports(
     override val date: String,
     val reportType: String,
     val fireDistance: Double
-) : ReportTest()
+) : Reports()

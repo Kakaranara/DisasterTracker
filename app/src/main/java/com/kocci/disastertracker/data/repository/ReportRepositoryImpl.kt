@@ -1,7 +1,7 @@
 package com.kocci.disastertracker.data.repository
 
 import com.kocci.disastertracker.data.source.remote.service.ApiService
-import com.kocci.disastertracker.domain.model.reports.ReportTest
+import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
 import com.kocci.disastertracker.domain.repository.ReportRepository
 import com.kocci.disastertracker.util.exception.EmptyListException
@@ -9,7 +9,7 @@ import com.kocci.disastertracker.util.exception.NonsenseException
 import com.kocci.disastertracker.util.exception.ProvinceNotFoundException
 import com.kocci.disastertracker.util.helper.MyLogger
 import com.kocci.disastertracker.util.helper.ProvinceHelper
-import com.kocci.disastertracker.util.mapper.convertReportApiResponseToDomain2
+import com.kocci.disastertracker.util.mapper.convertReportApiResponseToDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -21,10 +21,10 @@ class ReportRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : ReportRepository {
 
-    override fun getReportListTest(
+    override fun getReportList(
         provinceName: String?,
         disasterType: String?
-    ): Flow<Async<List<ReportTest>>> = flow {
+    ): Flow<Async<List<Reports>>> = flow {
         try {
             emit(Async.Loading)
             delay(500L) //just to show if loading exist.. remove later
@@ -44,7 +44,7 @@ class ReportRepositoryImpl @Inject constructor(
                 val body =
                     apiResponse.body() ?: throw NonsenseException("This should not be happen.")
                 val reportList =
-                    convertReportApiResponseToDomain2(body).filter { it.imgUrl != null }
+                    convertReportApiResponseToDomain(body).filter { it.imgUrl != null }
                 if (reportList.isEmpty()) {
                     throw EmptyListException("No reports available")
                 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kocci.disastertracker.domain.model.reports.ReportTest
+import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
 import com.kocci.disastertracker.domain.usecase.ReportDisasterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,8 +22,8 @@ class ReportViewModel @Inject constructor(
      * We use this because i need to listen reports in 2 different ways.
      * (onViewCreated and onMapsReady)
      */
-    private var _reports: MutableLiveData<Async<List<ReportTest>>> = MutableLiveData()
-    val reports: LiveData<Async<List<ReportTest>>> get() = _reports
+    private var _reports: MutableLiveData<Async<List<Reports>>> = MutableLiveData()
+    val reports: LiveData<Async<List<Reports>>> get() = _reports
 
 
     init {

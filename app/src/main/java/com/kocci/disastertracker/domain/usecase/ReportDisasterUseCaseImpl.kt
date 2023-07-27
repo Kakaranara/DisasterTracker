@@ -1,6 +1,6 @@
 package com.kocci.disastertracker.domain.usecase
 
-import  com.kocci.disastertracker.domain.model.reports.ReportTest
+import  com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
 import com.kocci.disastertracker.domain.repository.ReportRepository
 import com.kocci.disastertracker.util.helper.NotificationHelper
@@ -12,12 +12,11 @@ class ReportDisasterUseCaseImpl @Inject constructor(
     private val repository: ReportRepository,
     private val notificationHelper: NotificationHelper
 ) : ReportDisasterUseCase {
-
     override fun getAllReportData(
         provinceName: String?,
         disasterType: String?
-    ): Flow<Async<List<ReportTest>>> {
-        return repository.getReportListTest(provinceName, disasterType)
+    ): Flow<Async<List<Reports>>> {
+        return repository.getReportList(provinceName, disasterType)
     }
 
     override fun showFloodDangerNotification(floodDepth: Int) {

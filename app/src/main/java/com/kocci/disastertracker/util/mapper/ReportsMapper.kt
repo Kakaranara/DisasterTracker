@@ -13,37 +13,14 @@ import com.kocci.disastertracker.domain.model.reports.FireReports
 import com.kocci.disastertracker.domain.model.reports.FloodReport
 import com.kocci.disastertracker.domain.model.reports.GeneralReports
 import com.kocci.disastertracker.domain.model.reports.HazeReports
-import com.kocci.disastertracker.domain.model.reports.ReportTest
+import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.model.reports.VolcanoReports
 import com.kocci.disastertracker.domain.model.reports.WindReports
 import com.kocci.disastertracker.util.helper.DateHelper
 
-//fun convertReportApiResponseToDomain(reportsApiResponse: ReportsApiResponse): List<Reports> {
-//    val reportList = mutableListOf<Reports>()
-//    reportsApiResponse.result?.objects?.output?.geometries?.let { item ->
-//        item.map {
-//            val coordinates = Coordinates(
-//                lat = (it?.coordinates?.get(1) ?: 0.0), lng = it?.coordinates?.get(0) ?: 0.0
-//            )
-//            val title = it?.properties?.title ?: "No title"
-//            var body = it?.properties?.text ?: "No Description"
-//            val imgUrl = it?.properties?.imageUrl
-//            val date = it?.properties?.createdAt ?: ""
-//            val beautifyDate = DateHelper.beautifyDate(date)
-//            val disasterType = it?.properties?.disasterType ?: "Not Specified"
-//
-//            if (body.isEmpty()) {
-//                body = "No Description"
-//            }
-//            val reports = Reports(coordinates, title, body, beautifyDate, imgUrl, disasterType)
-//            reportList.add(reports)
-//        }
-//    }
-//    return reportList
-//}
 
-fun convertReportApiResponseToDomain2(reportsApiResponse: ReportsApiResponse): List<ReportTest> {
-    val reportList = mutableListOf<ReportTest>()
+fun convertReportApiResponseToDomain(reportsApiResponse: ReportsApiResponse): List<Reports> {
+    val reportList = mutableListOf<Reports>()
     reportsApiResponse.result?.objects?.output?.geometries?.let { item ->
         item.map {
             val coordinates = Coordinates(
