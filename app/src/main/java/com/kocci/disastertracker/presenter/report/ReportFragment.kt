@@ -20,6 +20,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.kocci.disastertracker.R
 import com.kocci.disastertracker.databinding.FragmentReportBinding
+import com.kocci.disastertracker.domain.model.reports.FloodReport
+import com.kocci.disastertracker.domain.model.reports.ReportTest
 import com.kocci.disastertracker.domain.reactive.Async
 import com.kocci.disastertracker.util.extension.gone
 import com.kocci.disastertracker.util.extension.showToast
@@ -75,24 +77,44 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
                     Log.d("TEST", "onViewCreated: ${it.data}")
 
                     binding.loadingReport.gone()
-                    val mAdapter = ReportListAdapter(it.data)
-                    val layout = LinearLayoutManager(requireActivity())
-                    binding.rvReportList.apply {
-                        adapter = mAdapter
-                        layoutManager = layout
+                    setupBottomSheetRvAdapter(it.data)
+
+                    val floodDepthList = mutableListOf<Int>()
+                    it.data.forEach { report ->
+                        if (report is FloodReport) {
+                            floodDepthList.add(report.floodDepth)
+                        }
+                    }
+                    floodDepthList.maxOrNull()?.let { maxDepth ->
+                        viewModel.showNotificationForFlood(maxDepth)
+//                        showToast(maxDepth.toString())
                     }
                 }
             }
         }
     }
 
+    private fun setupBottomSheetRvAdapter(data: List<ReportTest>) {
+        val mAdapter = ReportListAdapter(data)
+        val layout = LinearLayoutManager(requireActivity())
+        binding.rvReportList.apply {
+            adapter = mAdapter
+            layoutManager = layout
+        }
+    }
+
     private fun setupFilter() {
         binding.rgReport.apply {
-            check(binding.rbReportFlood.id) //flood is the the first check
+            check(binding.rbReportAll.id) //flood is the the first check
             setOnCheckedChangeListener { group, checkedId ->
                 val radioButton = findViewById<RadioButton>(checkedId)
                 val selectedText = radioButton.text.toString()
                 disasterType = selectedText.lowercase()
+
+                if (selectedText == getString(R.string.all_report)) {
+                    disasterType = null
+                }
+
                 viewModel.callApi(provinceName, disasterType)
             }
         }
@@ -119,9 +141,17 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
                     maps.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 8f))
 
                     reports.forEach { data ->
+                        var snippet = "Disaster : ${data.disasterType}"
                         val position = LatLng(data.coordinates.lat, data.coordinates.lng)
-                        val markerOpt = MarkerOptions().position(position).title(data.title)
-                            .snippet("Disaster : ${data.disasterType}")
+
+                        if (data is FloodReport) {
+                            snippet += ", Depth : ${data.floodDepth}"
+                        }
+
+                        val markerOpt = MarkerOptions()
+                            .position(position)
+                            .title(data.title)
+                            .snippet(snippet)
 
                         maps.addMarker(markerOpt)
                     }

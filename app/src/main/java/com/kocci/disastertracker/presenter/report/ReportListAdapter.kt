@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kocci.disastertracker.databinding.ItemReportCardBinding
-import com.kocci.disastertracker.domain.model.Reports
+import com.kocci.disastertracker.domain.model.reports.ReportTest
 
 class ReportListAdapter(
-    private val data: List<Reports>
+    private val data: List<ReportTest>
 ) : RecyclerView.Adapter<ReportListAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: ItemReportCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Reports) {
+        fun bind(data: ReportTest) {
             binding.tvReportTitle.text = data.title
             binding.tvReportBody.text = data.body
 //            binding.textView3.text = binding.root.context.getString(R.string.date_show, data.date)

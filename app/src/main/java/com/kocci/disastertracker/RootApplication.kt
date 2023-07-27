@@ -2,6 +2,7 @@ package com.kocci.disastertracker
 
 import android.app.Application
 import com.kocci.disastertracker.domain.usecase.DarkThemeUseCase
+import com.kocci.disastertracker.util.helper.NotificationHelper
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -14,8 +15,10 @@ class RootApplication : Application() {
      */
     @Inject
     lateinit var darkThemeUseCase: DarkThemeUseCase
+
     override fun onCreate() {
         super.onCreate()
         darkThemeUseCase.shouldEnableDarkTheme()
+        NotificationHelper.createNotificationChannel(this)
     }
 }
