@@ -21,4 +21,5 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="all_report">All Report</string>
     <string name="report_period">Report Period</string>
+    <string name="refresh_content">Refresh content</string>
 </resources>

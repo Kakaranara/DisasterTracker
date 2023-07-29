@@ -2,8 +2,6 @@ package com.kocci.disastertracker.util.helper
 
 import com.kocci.disastertracker.data.enums.AvailableProvince
 import com.kocci.disastertracker.util.exception.ProvinceNotFoundException
-import java.lang.Exception
-import java.lang.IllegalArgumentException
 
 object ProvinceHelper {
     fun getAvailableProvince(): List<String> {

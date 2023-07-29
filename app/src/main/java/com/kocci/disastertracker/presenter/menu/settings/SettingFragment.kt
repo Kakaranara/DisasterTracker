@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
-import com.kocci.disastertracker.R
 import com.kocci.disastertracker.databinding.FragmentSettingBinding
-import com.kocci.disastertracker.util.extension.showToast
 import com.kocci.disastertracker.util.helper.MyLogger
 import dagger.hilt.android.AndroidEntryPoint
 

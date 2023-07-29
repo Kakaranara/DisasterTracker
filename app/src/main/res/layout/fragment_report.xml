@@ -36,12 +36,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/btnReportRefresh"
             style="?attr/materialIconButtonFilledStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnReportRefresh"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/refresh_content"
             android:src="@drawable/baseline_refresh_24"
             app:icon="@drawable/baseline_refresh_24"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:scrollbars="none"
-            app:layout_constraintEnd_toEndOf="@id/acTvSearchReport"
-            app:layout_constraintStart_toStartOf="@id/acTvSearchReport"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/acTvSearchReport">
 
 
@@ -69,6 +70,7 @@
                     style="@style/CustomRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:text="@string/all_report" />
 
                 <RadioButton
@@ -111,6 +113,7 @@
                     style="@style/CustomRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
                     android:text="@string/volcano" />
             </RadioGroup>
         </HorizontalScrollView>

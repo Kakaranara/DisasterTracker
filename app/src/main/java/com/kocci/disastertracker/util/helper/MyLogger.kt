@@ -4,7 +4,7 @@ import android.util.Log
 
 // easy log (debug)
 object MyLogger {
-    private val TAG = "DEBUG LOG"
+    private const val TAG = "DEBUG LOG"
     fun w(msg: String) {
         Log.w(TAG, "w: $msg")
     }

@@ -60,7 +60,7 @@ dependencies {
 
     //ktx -> viewModel delegation
     implementation "androidx.activity:activity-ktx:1.7.2"
-    implementation "androidx.fragment:fragment-ktx:1.6.0"
+    implementation "androidx.fragment:fragment-ktx:1.6.1"
 
     //lifecycle -> convert flow to live data
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"

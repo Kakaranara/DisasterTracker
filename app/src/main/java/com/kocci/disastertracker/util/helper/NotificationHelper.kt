@@ -29,7 +29,7 @@ class NotificationHelper @Inject constructor(@ApplicationContext private val con
 
     companion object {
         const val REPORT_CHANNEL_ID = "Report_channel_id"
-        const val REPORT_CHANNEL_NAME = "Report_channel"
+        private const val REPORT_CHANNEL_NAME = "Report_channel"
 
         //RQC stands for Request Code.
         const val RQC_Report = 1250
